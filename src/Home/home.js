@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Alert, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -12,9 +12,9 @@ export default function Home() {
           <Text style={styles.startText}>Start</Text>
         </View>
       </Pressable>
-      <Pressable onPress={() => Alert.alert("Score page")}>
+      <Pressable onPress={() => navigation.navigate("Setting")}>
         <View style={styles.cardBoxSetting}>
-          <Text style={styles.settingText}>Score</Text>
+          <Text style={styles.settingText}>Setting</Text>
         </View>
       </Pressable>
     </View>

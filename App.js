@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
 import Home from "./src/Home/home";
 import Set from "./src/Set/set";
+import Setting from "./src/Setting/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -12,6 +12,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Set" component={Set} />
+        <Stack.Screen name="Setting" component={Setting} />
       </Stack.Navigator>
     </NavigationContainer>
   );
