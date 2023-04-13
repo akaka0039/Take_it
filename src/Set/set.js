@@ -46,7 +46,7 @@ export default function Set() {
                 navigation.navigate("Home");
               }}
             />
-            <Buttom text="Start" onPress={() => Alert.alert("Game page")} />
+            <Buttom text="Start" onPress={() => navigation.navigate("Game")} />
           </View>
         </View>
       </TouchableWithoutFeedback>
