@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import Logo from "./logo";
 
 export default function Home() {
   const navigation = useNavigation();
@@ -46,7 +47,8 @@ export default function Home() {
           </View>
         </View>
       </Pressable>
-      <Text style={styles.numberText}>7</Text>
+      <Logo />
+      {/* <Text style={styles.numberText}></Text> */}
       <View style={styles.Box}>
         <Pressable onPress={() => navigation.navigate("Result")}>
           <View style={styles.buttonBox}>
