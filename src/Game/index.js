@@ -48,7 +48,7 @@ export default function Home() {
       </Pressable>
       <Text style={styles.numberText}>7</Text>
       <View style={styles.Box}>
-        <Pressable onPress={() => navigation.navigate("Set")}>
+        <Pressable onPress={() => navigation.navigate("Result")}>
           <View style={styles.buttonBox}>
             <Text
               style={styles.buttonText}
