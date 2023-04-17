@@ -2,20 +2,27 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import Button from "./Button";
+import { Props } from "../Game/Dummydata";
 
 export default function Result() {
+  const loser = Props.reduce((accumulator, currentValue) =>
+    currentValue.score < accumulator.score ? currentValue : accumulator
+  );
+
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Take it!!!</Text>
       <Pressable onPress={() => navigation.navigate("Set")}>
         <View style={styles.cardBoxStart}>
-          <Text style={styles.startText}>PlayerName</Text>
+          <Text style={styles.startText}>{loser.members}</Text>
         </View>
       </Pressable>
       <View style={styles.button}>
         <Button
           text="Again"
+          numberOfLines={1}
+          ellipsizeMode="tail"
           onPress={() => {
             navigation.navigate("Game");
           }}
