@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import Button from "./Button";
 
-export default function Home() {
+export default function Result() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
