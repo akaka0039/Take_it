@@ -1,49 +1,12 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, Alert } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 
-import { useState, useEffect } from "react";
-import ScoreCard from "./scoreCard";
-import Switch from "./switch";
-import { Props } from "./Dummydata";
-
-export default function Game() {
-  const navigation = useNavigation();
-  const [number, setNumber] = useState(0);
-  const [count, setCount] = useState(0);
-
-  const ClickBottom = () => {
-    if (count == 4) {
-      return navigation.navigate("Result");
-    } else {
-      const random = Math.floor(Math.random() * 10);
-      setNumber(random);
-      Props[count]["score"] = random;
-      setCount(count + 1);
-    }
-  };
-
-  useEffect(() => {
-    navigation.addListener("focus", () => {
-      setNumber(0);
-      setCount(0);
-    });
-  }, [navigation]);
-
+export default function Switch() {
   return (
-    <View style={styles.container}>
-      <View style={styles.scoreBox}>
-        <View style={styles.cardBox}>
-          <ScoreCard />
-        </View>
-      </View>
-      <Text style={styles.numberText}>{number}</Text>
-
-      <View style={styles.Box}>
-        <Pressable onPress={() => ClickBottom()}>
-          <Switch />
-        </Pressable>
-      </View>
+    <View style={styles.buttonBox}>
+      <Text style={styles.buttonText} numberOfLines={1} ellipsizeMode="tail">
+        playerName
+      </Text>
     </View>
   );
 }
