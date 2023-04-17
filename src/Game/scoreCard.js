@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, Alert } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import React from "react";
 import { Props } from "./Dummydata";
 
