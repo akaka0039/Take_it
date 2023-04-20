@@ -1,5 +1,5 @@
 import Home from "./src/Home/home";
-import Set from "./src/Set/set";
+import Set from "./src/Set/index";
 import Setting from "./src/Setting/index";
 import Game from "./src/Game/index";
 import Result from "./src/Result/index";

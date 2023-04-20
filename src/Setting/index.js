@@ -10,10 +10,13 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from "react-native";
+import Button from "./Button";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Setting() {
   const [text, onChangeText] = React.useState("Name");
+  const navigation = useNavigation();
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -29,11 +32,19 @@ export default function Setting() {
               value={text}
             />
           </View>
-          <Pressable onPress={() => Alert.alert("Reset Bottom")}>
-            <View style={styles.cardBoxReset}>
+          <View style={styles.cardBoxReset}>
+            <Pressable onPress={() => Alert.alert("Reset Bottom")}>
               <Text style={styles.resetText}>Reset</Text>
-            </View>
-          </Pressable>
+            </Pressable>
+          </View>
+          <Button
+            text="Home"
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            onPress={() => {
+              navigation.navigate("Home");
+            }}
+          />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -62,7 +73,7 @@ const styles = StyleSheet.create({
   },
   cardBoxReset: {
     borderRadius: 10,
-    marginVertical: 220,
+    marginVertical: 100,
     marginHorizontal: 90,
     height: 120,
     backgroundColor: "#5DB075",

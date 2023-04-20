@@ -7,14 +7,35 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  Pressable,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Buttom from "./Button";
 import { useNavigation } from "@react-navigation/native";
+import Input from "./inputs";
+import LeftAllow from "../../assets/svg/left-arrow.svg";
+import RightAllow from "../../assets/svg/right-arrow.svg";
 
 export default function Set() {
-  const [text, onChangeText] = React.useState("Name");
+  const [number, setNumber] = useState(2);
+  const [texts, setTexts] = useState([...Array(number)].map(() => ""));
   const navigation = useNavigation();
+
+  const pullNumber = () => {
+    if (number > 2) {
+      var temNum = number - 1;
+      setNumber(temNum);
+    }
+    return;
+  };
+
+  const addNumber = () => {
+    if (number < 8) {
+      var temNum = number + 1;
+      setNumber(temNum);
+    }
+    return;
+  };
 
   return (
     <KeyboardAvoidingView
@@ -24,21 +45,19 @@ export default function Set() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Text style={styles.titleText}>2~8 people</Text>
-          <View style={styles.inputBox}>
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeText}
-              value={text}
-            />
+          <View style={styles.header}>
+            <Pressable onPress={pullNumber}>
+              <LeftAllow height={50} width={50} />
+            </Pressable>
+
+            <Text style={styles.numberText}>{number}</Text>
+            <Pressable onPress={addNumber}>
+              <RightAllow height={50} width={50} />
+            </Pressable>
           </View>
-          <View style={styles.inputBox}>
-            <TextInput style={styles.input} />
-          </View>
-          <View style={styles.addButtonContainer}>
-            <View style={styles.addButtonBox}>
-              <Text style={styles.addButton}>Add</Text>
-            </View>
-          </View>
+
+          <Input number={number} />
+
           <View style={styles.button}>
             <Buttom
               text="Back"
@@ -48,6 +67,7 @@ export default function Set() {
             />
             <Buttom text="Start" onPress={() => navigation.navigate("Game")} />
           </View>
+          {/* <LeftArrow height={100} width={100} /> */}
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -61,10 +81,19 @@ const styles = StyleSheet.create({
     height: 50,
   },
   titleText: {
-    paddingTop: 70,
+    paddingTop: 50,
     fontSize: 36,
     textAlign: "center",
-    paddingBottom: 30,
+    paddingBottom: 10,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  numberText: {
+    paddingTop: 5,
+    fontSize: 60,
+    textAlign: "center",
   },
   inputBox: {
     padding: 10,
