@@ -1,46 +1,35 @@
 import { StyleSheet, View, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Dummydata } from "../../assets/data/Dummydata";
 
-export default function Inputs(number) {
-  const [texts, setTexts] = useState([
-    "Alice",
-    "Bob",
-    "Charlotte",
-    "Dag",
-    "Easton",
-    "Faina",
-    "Genesis",
-    "Hana",
-  ]);
+export default function Inputs(props) {
+  const [texts, setTexts] = useState(Dummydata);
 
   const handleTextChange = (text, i) => {
     const newText = [...texts];
-    newText[i] = text;
+    newText[i].members = text;
     setTexts(newText);
   };
 
-  var Cards = [];
-
-  Cards.push(
-    texts.map(
-      (text, index) =>
-        index < number.number && (
-          <View style={styles.Box}>
-            <View style={styles.inputBox}>
-              <TextInput
-                style={styles.input}
-                key={index}
-                onChangeText={(text) => handleTextChange(text, index)}
-                value={text}
-                placeholder={`Type something for box ${index + 1}...`}
-              />
-            </View>
-          </View>
-        )
-    )
+  return (
+    <View style={styles.Box}>
+      {texts &&
+        texts.map(
+          (t) =>
+            t.id < props.number && (
+              <View key={t.id} style={styles.Box}>
+                <View style={styles.inputBox}>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(text) => handleTextChange(text, t.id)}
+                    value={t.members}
+                  />
+                </View>
+              </View>
+            )
+        )}
+    </View>
   );
-
-  return <View style={styles.Box}>{Cards}</View>;
 }
 
 const styles = StyleSheet.create({

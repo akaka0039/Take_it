@@ -2,8 +2,6 @@ import {
   StyleSheet,
   View,
   Text,
-  Alert,
-  TextInput,
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -18,7 +16,6 @@ import RightAllow from "../../assets/svg/right-arrow.svg";
 
 export default function Set() {
   const [number, setNumber] = useState(2);
-  const [texts, setTexts] = useState([...Array(number)].map(() => ""));
   const navigation = useNavigation();
 
   const pullNumber = () => {
@@ -49,13 +46,11 @@ export default function Set() {
             <Pressable onPress={pullNumber}>
               <LeftAllow height={50} width={50} />
             </Pressable>
-
             <Text style={styles.numberText}>{number}</Text>
             <Pressable onPress={addNumber}>
               <RightAllow height={50} width={50} />
             </Pressable>
           </View>
-
           <Input number={number} />
 
           <View style={styles.button}>
@@ -65,9 +60,15 @@ export default function Set() {
                 navigation.navigate("Home");
               }}
             />
-            <Buttom text="Start" onPress={() => navigation.navigate("Game")} />
+            <Buttom
+              text="Start"
+              onPress={() => {
+                navigation.navigate("Game", {
+                  number: number,
+                });
+              }}
+            />
           </View>
-          {/* <LeftArrow height={100} width={100} /> */}
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
