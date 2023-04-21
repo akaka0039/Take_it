@@ -2,6 +2,19 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 
 export default function Button({ text, onPress }) {
+  // const handleNavigation = (k) => {
+  //   for (var i = 0; i < number; i++) {
+  //     Dummydata[i]["score"] = "null";
+  //   }
+  //   if ((k = 1)) {
+  //     navigation.navigate("Game", {
+  //       number: number,
+  //     });
+  //     // } else {
+  //     //   navigation.navigate("Home");
+  //     // }
+  //   }
+  // };
   return (
     <Pressable style={styles.button} onPress={onPress}>
       <View style={styles.textContainer}>

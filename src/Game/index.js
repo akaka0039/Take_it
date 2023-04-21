@@ -1,31 +1,35 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { useState, useEffect } from "react";
 import ScoreCard from "./scoreCard";
 import Switch from "./switch";
-import { Props } from "./Dummydata";
+import { Dummydata } from "../../assets/data/Dummydata";
 
 export default function Game() {
+  const route = useRoute();
+  var number = route.params.number;
   const navigation = useNavigation();
-  const [number, setNumber] = useState(0);
+  const [score, setScore] = useState(0);
   const [count, setCount] = useState(0);
 
   const ClickBottom = () => {
-    if (count == 4) {
-      return navigation.navigate("Result");
+    if (count == number) {
+      return navigation.navigate("Result", {
+        number: number,
+      });
     } else {
       const random = Math.floor(Math.random() * 10);
-      setNumber(random);
-      Props[count]["score"] = random;
+      setScore(random);
+      Dummydata[count]["score"] = random;
       setCount(count + 1);
     }
   };
 
   useEffect(() => {
     navigation.addListener("focus", () => {
-      setNumber(0);
+      setScore(0);
       setCount(0);
     });
   }, [navigation]);
@@ -37,7 +41,7 @@ export default function Game() {
           <ScoreCard />
         </View>
       </View>
-      <Text style={styles.numberText}>{number}</Text>
+      <Text style={styles.numberText}>{score}</Text>
 
       <View style={styles.Box}>
         <Pressable onPress={() => ClickBottom()}>

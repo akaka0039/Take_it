@@ -1,13 +1,13 @@
 import { StyleSheet, View, Text } from "react-native";
 import React from "react";
-import { Props } from "./Dummydata";
+import { Dummydata } from "../../assets/data/Dummydata";
 
 export default function scoreCard() {
   return (
     <View style={styles.scoreBox}>
       <View style={styles.cardBox}>
-        {Props &&
-          Props.map((u) => {
+        {Dummydata &&
+          Dummydata.map((u) => {
             if (u.score !== "null" || u.score == 0) {
               return (
                 <View key={u.id} style={styles.cardBoxScore}>

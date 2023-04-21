@@ -1,15 +1,31 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Button from "./Button";
-import { Props } from "../Game/Dummydata";
+import { Dummydata } from "../../assets/data/Dummydata";
 
 export default function Result() {
-  const loser = Props.reduce((accumulator, currentValue) =>
+  const route = useRoute();
+  var number = route.params.number;
+  const navigation = useNavigation();
+
+  const handleNavigation = (k) => {
+    for (var i = 0; i < number; i++) {
+      Dummydata[i]["score"] = "null";
+    }
+    if (k == 1) {
+      navigation.navigate("Game", {
+        number: number,
+      });
+    } else {
+      navigation.navigate("Home");
+    }
+  };
+
+  const loser = Dummydata.reduce((accumulator, currentValue) =>
     currentValue.score < accumulator.score ? currentValue : accumulator
   );
 
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Take it!!!</Text>
@@ -23,11 +39,9 @@ export default function Result() {
           text="Again"
           numberOfLines={1}
           ellipsizeMode="tail"
-          onPress={() => {
-            navigation.navigate("Game");
-          }}
+          onPress={() => handleNavigation(1)}
         />
-        <Button text="Finish" onPress={() => navigation.navigate("Home")} />
+        <Button text="Finish" onPress={() => handleNavigation(0)} />
       </View>
     </View>
   );
