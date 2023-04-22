@@ -5,6 +5,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  ImageBackground,
   Pressable,
 } from "react-native";
 import React, { useState } from "react";
@@ -13,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import Input from "./inputs";
 import LeftAllow from "../../assets/svg/left-arrow.svg";
 import RightAllow from "../../assets/svg/right-arrow.svg";
+import setImage from "../../assets/image/Set_back.png";
 
 export default function Set() {
   const [number, setNumber] = useState(2);
@@ -40,36 +42,41 @@ export default function Set() {
       style={styles.container}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <Text style={styles.titleText}>2~8 people</Text>
-          <View style={styles.header}>
-            <Pressable onPress={pullNumber}>
-              <LeftAllow height={50} width={50} />
-            </Pressable>
-            <Text style={styles.numberText}>{number}</Text>
-            <Pressable onPress={addNumber}>
-              <RightAllow height={50} width={50} />
-            </Pressable>
+        <ImageBackground
+          source={setImage}
+          resizeMode="cover"
+          style={styles.image}
+        >
+          <View>
+            <Text style={styles.titleText}>2~8 people</Text>
+            <View style={styles.header}>
+              <Pressable onPress={pullNumber}>
+                <LeftAllow height={50} width={50} />
+              </Pressable>
+              <Text style={styles.numberText}>{number}</Text>
+              <Pressable onPress={addNumber}>
+                <RightAllow height={50} width={50} />
+              </Pressable>
+            </View>
+            <Input number={number} />
+            <View style={styles.button}>
+              <Buttom
+                text="Back"
+                onPress={() => {
+                  navigation.navigate("Home");
+                }}
+              />
+              <Buttom
+                text="Start"
+                onPress={() => {
+                  navigation.navigate("Game", {
+                    number: number,
+                  });
+                }}
+              />
+            </View>
           </View>
-          <Input number={number} />
-
-          <View style={styles.button}>
-            <Buttom
-              text="Back"
-              onPress={() => {
-                navigation.navigate("Home");
-              }}
-            />
-            <Buttom
-              text="Start"
-              onPress={() => {
-                navigation.navigate("Game", {
-                  number: number,
-                });
-              }}
-            />
-          </View>
-        </View>
+        </ImageBackground>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
@@ -77,6 +84,10 @@ export default function Set() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
   },
   titleBox: {
     height: 50,

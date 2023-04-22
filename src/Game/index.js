@@ -1,11 +1,17 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  ImageBackground,
+} from "react-native";
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-
 import { useState, useEffect } from "react";
 import ScoreCard from "./scoreCard";
 import Switch from "./switch";
 import { Dummydata } from "../../assets/data/Dummydata";
+import gameImage from "../../assets/image/Game_back.png";
 
 export default function Game() {
   const route = useRoute();
@@ -35,26 +41,31 @@ export default function Game() {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.scoreBox}>
-        <View style={styles.cardBox}>
-          <ScoreCard />
+    <ImageBackground source={gameImage} resizeMode="cover" style={styles.image}>
+      <View style={styles.container}>
+        <View style={styles.scoreBox}>
+          <View style={styles.cardBox}>
+            <ScoreCard data={Dummydata} />
+          </View>
+        </View>
+        <Text style={styles.numberText}>{score}</Text>
+        <View style={styles.Box}>
+          <Pressable onPress={() => ClickBottom()}>
+            <Switch count={count} number={number} />
+          </Pressable>
         </View>
       </View>
-      <Text style={styles.numberText}>{score}</Text>
-
-      <View style={styles.Box}>
-        <Pressable onPress={() => ClickBottom()}>
-          <Switch />
-        </Pressable>
-      </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
   },
   scoreBox: {
     paddingTop: 10,

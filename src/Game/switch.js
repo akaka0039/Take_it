@@ -1,11 +1,20 @@
 import { StyleSheet, View, Text, Pressable, Alert } from "react-native";
 import React from "react";
+import { Dummydata } from "../../assets/data/Dummydata";
 
-export default function Switch() {
+export default function Switch(props) {
+  var number = props.number;
+  var count = props.count;
+  var name = "";
+  if (number == count) {
+    name = "Result";
+  } else {
+    name = Dummydata[props.count]["members"];
+  }
   return (
     <View style={styles.buttonBox}>
       <Text style={styles.buttonText} numberOfLines={1} ellipsizeMode="tail">
-        playerName
+        {name}
       </Text>
     </View>
   );

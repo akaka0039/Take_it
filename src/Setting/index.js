@@ -6,6 +6,7 @@ import {
   Pressable,
   TextInput,
   onChangeText,
+  ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -13,6 +14,7 @@ import {
 import Button from "./Button";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import setImage from "../../assets/image/Game_back.png";
 
 export default function Setting() {
   const [text, onChangeText] = React.useState("Name");
@@ -23,29 +25,35 @@ export default function Setting() {
       style={styles.container}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <Text style={styles.nameText}>Name</Text>
-          <View style={styles.inputBox}>
-            <TextInput
-              style={styles.nameInput}
-              onChangeText={onChangeText}
-              value={text}
+        <ImageBackground
+          source={setImage}
+          resizeMode="cover"
+          style={styles.image}
+        >
+          <View style={styles.container}>
+            <Text style={styles.nameText}>Name</Text>
+            <View style={styles.inputBox}>
+              <TextInput
+                style={styles.nameInput}
+                onChangeText={onChangeText}
+                value={text}
+              />
+            </View>
+            <View style={styles.cardBoxReset}>
+              <Pressable onPress={() => Alert.alert("Reset Bottom")}>
+                <Text style={styles.resetText}>Reset</Text>
+              </Pressable>
+            </View>
+            <Button
+              text="Home"
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              onPress={() => {
+                navigation.navigate("Home");
+              }}
             />
           </View>
-          <View style={styles.cardBoxReset}>
-            <Pressable onPress={() => Alert.alert("Reset Bottom")}>
-              <Text style={styles.resetText}>Reset</Text>
-            </Pressable>
-          </View>
-          <Button
-            text="Home"
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            onPress={() => {
-              navigation.navigate("Home");
-            }}
-          />
-        </View>
+        </ImageBackground>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
@@ -53,6 +61,10 @@ export default function Setting() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
   },
   nameText: {
     paddingTop: 50,
