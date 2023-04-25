@@ -5,13 +5,13 @@ import {
   Pressable,
   ImageBackground,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Button from "./Button";
 import { Dummydata } from "../../assets/data/Dummydata";
 import resultImage from "../../assets/image/Result_back.png";
 
-export default function Result() {
+export default function Result({ db }) {
   const route = useRoute();
   var number = route.params.number;
   const navigation = useNavigation();
@@ -27,6 +27,29 @@ export default function Result() {
     } else {
       navigation.navigate("Home");
     }
+  };
+
+  useEffect(() => {
+    gameCounter();
+  }, []);
+
+  const gameCounter = () => {
+    db.transaction((tx) => {
+      if (loser.id == 0) {
+        tx.executeSql(
+          `UPDATE Record SET game = game + 1, lose = lose + 1 where _id = 1;`,
+          [],
+          (tx, results) => {}
+        );
+      } else {
+        tx.executeSql(
+          `update Record set game = game + 1, win = win + 1 where _id = 1;`,
+          [],
+          (tx, results) => {},
+          (tx, error) => {}
+        );
+      }
+    });
   };
 
   const loser = Dummydata.reduce((accumulator, currentValue) =>

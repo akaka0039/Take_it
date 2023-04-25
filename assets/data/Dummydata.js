@@ -1,7 +1,7 @@
 export var Dummydata = [
   {
     id: 0,
-    members: "Alice",
+    members: "Alice(Host)",
     score: "null",
   },
   {
