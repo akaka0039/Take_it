@@ -15,7 +15,6 @@ export default function Result({ db }) {
   const route = useRoute();
   var number = route.params.number;
   const navigation = useNavigation();
-
   const handleNavigation = (k) => {
     for (var i = 0; i < number; i++) {
       Dummydata[i]["score"] = "null";
@@ -37,16 +36,11 @@ export default function Result({ db }) {
     db.transaction((tx) => {
       if (loser.id == 0) {
         tx.executeSql(
-          `UPDATE Record SET game = game + 1, lose = lose + 1 where _id = 1;`,
-          [],
-          (tx, results) => {}
+          `UPDATE Record SET game = game + 1, lose = lose + 1 where _id = 1;`
         );
       } else {
         tx.executeSql(
-          `update Record set game = game + 1, win = win + 1 where _id = 1;`,
-          [],
-          (tx, results) => {},
-          (tx, error) => {}
+          `update Record set game = game + 1, win = win + 1 where _id = 1;`
         );
       }
     });

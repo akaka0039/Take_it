@@ -6,7 +6,7 @@ import Result from "./src/Result/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SQLite from "expo-sqlite";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Platform } from "react-native";
 
 function openDatabase() {
@@ -19,7 +19,6 @@ function openDatabase() {
       },
     };
   }
-
   const db = SQLite.openDatabase("Record.db");
   return db;
 }
@@ -27,22 +26,6 @@ const db = openDatabase();
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const [record, setRecord] = useState();
-
-  useEffect(() => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        `create table if not exists Record (_id integer primary key AUTOINCREMENT, game integer not null, win integer not null, lose integer not null);`
-      );
-      // tx.executeSql("select * FROM Record", [], (tx, results) => {
-      //   const len = results.rows.length;
-      //   if (len === 0) {
-      //     insertData();
-      //   }
-      // });
-    });
-  }, []);
-
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -50,11 +33,9 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Home">
-          {() => <Home db={db} record={record} />}
-        </Stack.Screen>
+        <Stack.Screen name="Home">{() => <Home db={db} />}</Stack.Screen>
         <Stack.Screen name="Set" component={Set} />
-        <Stack.Screen name="Setting" component={Setting} />
+        <Stack.Screen name="Setting">{() => <Setting db={db} />}</Stack.Screen>
         <Stack.Screen name="Game" component={Game} />
         <Stack.Screen name="Result">{() => <Result db={db} />}</Stack.Screen>
       </Stack.Navigator>
