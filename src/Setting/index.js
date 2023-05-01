@@ -16,9 +16,61 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import setImage from "../../assets/image/Game_back.png";
 
-export default function Setting() {
+export default function Setting({ db }) {
   const [text, onChangeText] = React.useState("Name");
   const navigation = useNavigation();
+
+  const removeRecordsAlert = () => {
+    Alert.alert(
+      "Remove all records",
+      "Once you delete all records, it cannot be undone",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => clearRecords() },
+      ]
+    );
+  };
+
+  // for developer
+  // const dropTable = () => {
+  //   Alert.alert(
+  //     "Remove all records",
+  //     "Once you delete all records, it cannot be undone",
+  //     [
+  //       {
+  //         text: "Cancel",
+  //         style: "cancel",
+  //       },
+  //       {
+  //         text: "OK",
+  //         onPress: () =>
+  //           db.transaction((tx) => {
+  //             tx.executeSql(`DROP table Record;`);
+  //             // tx.executeSql(
+  //             //   `create table if not exists Record (_id integer primary key not null, game integer not null, win integer not null, lose integer not null);`
+  //             // );
+  //             // tx.executeSql(
+  //             //   `insert into Record (_id,game, win,lose) values (?,?,?,?);`,
+  //             //   [1, 0, 0, 0]
+  //             // );
+  //           }),
+  //       },
+  //     ]
+  //   );
+  // };
+
+  const clearRecords = () => {
+    db.transaction((tx) => {
+      tx.executeSql(`DELETE FROM Record;`);
+      tx.executeSql(
+        `insert into Record (_id,game, win,lose) values (?,?,?,?);`,
+        [1, 0, 0, 0]
+      );
+    });
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -40,10 +92,15 @@ export default function Setting() {
               />
             </View>
             <View style={styles.cardBoxReset}>
-              <Pressable onPress={() => Alert.alert("Reset Bottom")}>
+              <Pressable onPress={() => removeRecordsAlert()}>
                 <Text style={styles.resetText}>Reset</Text>
               </Pressable>
             </View>
+
+            {/* <Pressable onPress={() => dropTable()}>
+              <Text style={styles.resetText}>Drop</Text>
+            </Pressable> */}
+
             <Button
               text="Home"
               numberOfLines={1}

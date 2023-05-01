@@ -5,30 +5,33 @@ import {
   Pressable,
   ImageBackground,
 } from "react-native";
-import React, { useState, useEffect } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import homeImage from "../../assets/image/Home_back.png";
 
 export default function Home({ db }) {
   const navigation = useNavigation();
   const [recordHome, setRecordHome] = useState();
 
-  useEffect(() => {
-    navigation.addListener("focus", () => {
+  useFocusEffect(
+    useCallback(() => {
       db.transaction((tx) => {
         tx.executeSql(
-          `select * from Record;`,
-          [],
-          (_, { rows }) => {
-            setRecordHome(rows._array);
-          },
-          (tx, error) => {
-            setRecordHome("select failed" + error);
-          }
+          `create table if not exists Record (_id integer primary key not null, game integer not null, win integer not null, lose integer not null);`
+        );
+        tx.executeSql(
+          `insert into Record (_id,game, win,lose) values (?,?,?,?);`,
+          [1, 0, 0, 0]
         );
       });
-    });
-  }, [navigation]);
+      db.transaction((tx) => {
+        tx.executeSql(`select * from Record;`, [], (_, { rows }) => {
+          setRecordHome(rows._array);
+        });
+      });
+    }, [])
+  );
+
   return (
     <ImageBackground
       source={homeImage}
