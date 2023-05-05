@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   button: {
     width: 150,
     height: 60,
-    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
     marginVertical: 8,
     backgroundColor: "#5DB075",
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
   },
   text: {
