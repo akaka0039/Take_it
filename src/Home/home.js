@@ -56,7 +56,7 @@ export default function Home({ db }) {
         </Pressable>
         <Pressable onPress={() => navigation.navigate("Setting")}>
           <View style={styles.cardBoxSetting}>
-            <Text style={styles.settingText}>Setting</Text>
+            <Text style={styles.settingText}>Score</Text>
           </View>
         </Pressable>
       </View>
