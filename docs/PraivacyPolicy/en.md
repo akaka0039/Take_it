@@ -1,5 +1,3 @@
-## プライバシーポリシー
-
 Privacy Policy Update for Take it Version [1.0]
 
 20230516
