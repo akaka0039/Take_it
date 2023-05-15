@@ -2,26 +2,26 @@
   "expo": {
     "name": "take_it",
     "slug": "take_it",
-    "version": "1.0.0",
+    "version": "1.0.2",
+    "versionCode": 2,
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFF1BE"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.akaka0039.takeit"
     },
     "android": {
       "adaptiveIcon": {
+        "versionCode": 2,
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#FFF1BE"
       },
       "package": "com.akaka0039.take_it"
     },
