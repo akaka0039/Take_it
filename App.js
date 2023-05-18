@@ -5,7 +5,6 @@ import Game from "./src/Game/index";
 import Result from "./src/Result/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as SQLite from "expo-sqlite";
 import { Platform } from "react-native";
 
@@ -26,7 +25,6 @@ const db = openDatabase();
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
 
   return (
     <NavigationContainer>
