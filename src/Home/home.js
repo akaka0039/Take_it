@@ -8,6 +8,7 @@ import {
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import homeImage from "../../assets/image/Home_back.png";
+import { AdBannerComponent } from "../Ad/ad_banners";
 
 export default function Home({ db }) {
   const navigation = useNavigation();
@@ -60,6 +61,7 @@ export default function Home({ db }) {
           </View>
         </Pressable>
       </View>
+      <AdBannerComponent />
     </ImageBackground>
   );
 }
@@ -128,5 +130,10 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     fontSize: 36,
     textAlign: "center",
+  },
+  BannerBox: {
+    height: 100,
+    paddingTop: 35,
+    paddingVertical: 8,
   },
 });
