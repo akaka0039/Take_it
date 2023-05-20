@@ -9,10 +9,10 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from "react-native";
-import Button from "./Button";
 import React, { useCallback, useState } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import setImage from "../../assets/image/Game_back.png";
+import { AdBannerComponent } from "../Ad/ad_banners";
 
 export default function Setting({ db }) {
   const navigation = useNavigation();
@@ -75,7 +75,6 @@ export default function Setting({ db }) {
                   <Text style={styles.scoreTitle}>Win</Text>
                 </View>
               </View>
-
               <View style={styles.titleOutlineGame}>
                 <Text style={styles.scoreTitleGame}>Game</Text>
               </View>
@@ -83,7 +82,6 @@ export default function Setting({ db }) {
                 <Text style={styles.scoreTitle}>Take it!!!</Text>
               </View>
             </View>
-
             <View style={styles.scoreNumberBox}>
               <View style={styles.numberOutlineWin}>
                 <Text style={styles.numberScore}>{record[0]["win"]}</Text>
@@ -91,12 +89,10 @@ export default function Setting({ db }) {
               <View style={styles.numberOutlineGame}>
                 <Text style={styles.numberScore}>{record[0]["game"]}</Text>
               </View>
-
               <View style={styles.numberOutlineLose}>
                 <Text style={styles.numberScore}>{record[0]["lose"]}</Text>
               </View>
             </View>
-
             <View style={styles.cardBox}>
               <Pressable onPress={() => removeRecordsAlert()}>
                 <View style={styles.cardBoxReset}>
@@ -104,16 +100,6 @@ export default function Setting({ db }) {
                 </View>
               </Pressable>
             </View>
-
-            {/* <Button
-              text="Home"
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              onPress={() => {
-                navigation.navigate("Home");
-              }}
-            /> */}
-
             <View style={styles.cardBox}>
               <Pressable onPress={() => navigation.navigate("Home")}>
                 <View style={styles.cardBoxHome}>
@@ -122,6 +108,7 @@ export default function Setting({ db }) {
               </Pressable>
             </View>
           </View>
+          <AdBannerComponent />
         </ImageBackground>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

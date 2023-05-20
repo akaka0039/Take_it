@@ -5,11 +5,12 @@ import {
   Pressable,
   ImageBackground,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Button from "./Button";
 import { Dummydata } from "../../assets/data/Dummydata";
 import resultImage from "../../assets/image/Result_back.png";
+import { AdBannerComponent } from "../Ad/ad_banners";
 
 export default function Result({ db }) {
   const route = useRoute();
@@ -73,6 +74,7 @@ export default function Result({ db }) {
           <Button text="Finish" onPress={() => handleNavigation(0)} />
         </View>
       </View>
+      <AdBannerComponent />
     </ImageBackground>
   );
 }
